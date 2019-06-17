@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+	<bean id="hd" class = "com.kitri.hello3.HelloDao" />
+
+	<!-- 생성자를 이용한 방법 -->
+	<bean id = "hs" class="com.kitri.hello3.HelloServiceKor" >
+		<constructor-arg ref ="hd"/>
+	</bean>
+	
+	
+<!-- 	<bean id = "hs" class="com.kitri.hello3.HelloServiceKor" >  --> <!-- 싱글톤 -->
+<!-- 		<property name="helloDao" ref="hd"></property>   --><!-- get과 셋을 뺀 첫번째 글자를 소문자로 바꾼것을 프로퍼티라고 한다, 위에서 만든 객체를 hellodao의 세터로 집어넣어준다  -->
+<!-- 	</bean> -->
+	
+	
+	<!-- <bean id = "hs1"  name = "haservice,helloservice" class="com.kitri.hello3.HelloServiceEng" /> -->
+	
+</beans>

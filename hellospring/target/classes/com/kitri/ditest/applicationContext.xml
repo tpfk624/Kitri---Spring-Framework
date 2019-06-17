@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-4.3.xsd">
+
+
+
+	<!--  **************생성자를 이용하는 방법*************  -->
+	<bean id="m1" class="com.kitri.ditest.MemberDto">
+		<constructor-arg index="1"><!-- 1번째 인덱스에 홍길동을 넣어라-->
+			<value>홍길동</value>
+		</constructor-arg>
+		<constructor-arg index="0">
+			<value>hong</value>
+		</constructor-arg>
+	</bean>
+
+	<bean id="m2" class="com.kitri.ditest.MemberDto">
+		<constructor-arg value="홍길동" />
+		<constructor-arg value="25" type="int" /> <!--String으로 잡혀서 이름에 25가 잡힘 -> type을 int로 잡아줌 --><!-- 생성자 순
+		서대로 들어감  -->
+	</bean>
+
+	<bean id="m3" class="com.kitri.ditest.MemberDto">
+		<constructor-arg value="홍길동" />
+		<constructor-arg value="8000000" type="double" />
+	</bean>
+
+	<bean id="m4" class="com.kitri.ditest.MemberDto">
+		<constructor-arg value="홍길동" index="1" />
+		<constructor-arg value="hong" name="id" />
+		<constructor-arg value="8000000" type="double" />
+		<constructor-arg value="25" type="int" />
+	</bean>
+
+	<bean id="m5" class="com.kitri.ditest.MemberDto">
+		<constructor-arg value="홍길동" index="1" />
+		<constructor-arg value="hong" name="id" />
+		<constructor-arg value="8000000" type="double" />
+		<constructor-arg value="25" type="int" />
+		<constructor-arg ref="address1" /> <!-- 쓰려는애가 밑에 있어서 오류가 날 거 같지만 상관x 다 만들고 사용하기때문?? 만들기만 하면 됨 -->
+	</bean>
+
+	<bean id="address1" class="com.kitri.ditest.AddressDto">
+		<constructor-arg value="23689" />
+		<constructor-arg
+			value="서울시 구로구 구로디지털로 34길 코오롱싸이언스밸리 1차" />
+		<constructor-arg value="4층 한국정보기술연구원 4강의장" />
+	</bean>
+
+
+
+
+	<!--  **************property를 이용하는 방법(setter)*************  -->
+	<bean id="m6" class="com.kitri.ditest.MemberDto"> <!-- 순서 상관x -->
+		<property name="name" value="홍길동"/>
+		<property name="addressDto" ref="address2"/>
+		<property name="age" value="24"/>
+		<property name="money" value="25000"/>
+		<property name="id" value="hong"/>
+	</bean>
+
+
+	<bean id="address2" class="com.kitri.ditest.AddressDto">
+		<property name="zipcode" value="23689" />
+		<property name="address" value="서울시 구로구 구로디지털로 34길 코오롱싸이언스밸리 1차" />
+		<property name="addressDetail" value="4층 한국정보기술연구원 4강의장" />
+	</bean>
+
+
+	<!-- **************NameSpace 를 이용하는 방법*************  -->
+	<bean id="m7" class="com.kitri.ditest.MemberDto"
+		p:id="java"
+		p:name="이순신"
+		p:age="24"
+		p:money="25362000"
+		p:addressDto-ref="address3"
+	/>
+
+	<bean id="address3" class="com.kitri.ditest.AddressDto" 
+		p:zipcode="12345"
+		p:address="전라남도 여수시 여수공원"
+		p:addressDetail="3층"
+	/>
+	
+</beans>
+
+
+
+
+
+
+
+
