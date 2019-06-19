@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns="http://xmlns.jcp.org/xml/ns/javaee" xsi:schemaLocation="http://xmlns.jcp.org/xml/ns/javaee http://xmlns.jcp.org/xml/ns/javaee/web-app_3_1.xsd" id="WebApp_ID" version="3.1">
+  <display-name>hellospringmvc</display-name>
+
+	<!-- 비 web 애들을 불러오는 부분 -->
+	<context-param><!-- ContextLoadListener에서 호출되는 부분? 실행 시 바로   -->
+		<param-name>contextConfigLocation</param-name>
+		<param-value>/WEB-INF/application-context.xml</param-value>
+	</context-param>
+
+	<listener><!-- Was가 Context를 Load하는 것을 감시하는 listener 메모리에 올라가는걸 감시하고 위를 바로 실행함  -->
+		<listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+	</listener>
+	<!-- 비 web 애들을 불러오는 부분 -->
+	
+	
+	<servlet>
+		<servlet-name>dispatcher</servlet-name>
+		<servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+		<init-param><!-- 서블릿만들때 초기 파람  -->
+			<param-name>contextConfigLocation</param-name>
+			<param-value>/WEB-INF/servlet-context.xml</param-value> 
+			<!-- <param-value>classpath:com/kitri/hello/config/a.xml</param-value> --><!-- 파일을 web-inf밑에 lib로 넣지 않을 경우에 classpath를 사용하여 경로지정 --> 			
+		</init-param>
+	</servlet>
+
+	<servlet-mapping>
+		<servlet-name>dispatcher</servlet-name>
+		<url-pattern>*.kitri</url-pattern><!-- *.kitri로 들어오게 되면 DispatcherServlet이 처리하겠다-->
+	</servlet-mapping>
+
+ 
+  <welcome-file-list> <!-- 주소 아무것도 안쳤을때 찾아주는거 -->
+    <welcome-file>index.jsp</welcome-file>
+  </welcome-file-list>
+</web-app>
