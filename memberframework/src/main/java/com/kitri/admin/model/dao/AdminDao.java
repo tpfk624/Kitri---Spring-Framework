@@ -8,5 +8,7 @@ import com.kitri.member.model.MemberDetailDto;
 public interface AdminDao {
 
 	public List<MemberDetailDto> getMemberList(Map<String, String> map);
+
+	public List<MemberDetailDto> getMemberList(String key, String word);
 	
 }

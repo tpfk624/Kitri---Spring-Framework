@@ -2,6 +2,7 @@ package com.kitri.member.model.service;
 
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 import org.json.JSONArray;
 import org.json.JSONObject;
@@ -11,7 +12,7 @@ import org.springframework.stereotype.Service;
 import com.kitri.member.model.*;
 import com.kitri.member.model.dao.MemberDao;
 import com.kitri.member.model.dao.MemberDaoImpl;
-import com.sun.javafx.collections.MappingChange.Map;
+
 
 @Service
 public class MemberServiceImpl implements MemberService{
@@ -56,10 +57,10 @@ public class MemberServiceImpl implements MemberService{
 	}
 
 	@Override
-	public MemberDto loginMember(String id, String pass) {
-		HashMap<String, String> map = new HashMap<String, String>();
-		map.put("userid", id);
-		map.put("userpwd", pass);		
+	public MemberDto loginMember(Map<String, String> map) {
+//		HashMap<String, String> map = new HashMap<String, String>();
+//		map.put("userid", id);
+//		map.put("userpwd", pass);		
 		return  memberDao.loginMember(map);
 	}
 
