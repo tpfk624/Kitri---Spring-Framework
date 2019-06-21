@@ -4,12 +4,13 @@ import java.sql.*;
 import java.util.*;
 
 import org.apache.ibatis.session.SqlSession;
+import org.springframework.stereotype.Repository;
 
 import com.kitri.member.model.MemberDetailDto;
 import com.kitri.member.model.MemberDto;
 import com.kitri.sqlmap.MyBatisConfiguration;
 
-
+@Repository
 public class AdminDaoImpl implements AdminDao {
 
 	private final String NAME_SPACE = "com.kitri.admin.model.dao.AdminDao";
@@ -22,6 +23,12 @@ public class AdminDaoImpl implements AdminDao {
 		}finally {
 			session.close();
 		}
+	}
+
+	@Override
+	public List<MemberDetailDto> getMemberList(String key, String word) {
+		// TODO Auto-generated method stub
+		return null;
 	}
 
 }

@@ -19,21 +19,25 @@ $(document).ready(function(){
 function memberList(key, word){
 	$("#mlist").empty();
 	$.ajax({
-		url:"${root}/admin",	
+		url:"${root}/admin/memberlist.kitri",	
 		type:"get",		
-		dataType:"xml",
-		data : "act=getmemberlist&key=" + key + "&word=" + word,
+		dataType:"json",
+		data : {
+			"key" : key,
+			"word": word
+			},
 		timeout : 30000,
 		cache : false,
-		success : function(xml){	// 성공  
-			var member = $(xml).find("member");
-			for(var i =0; i<member.length; i++){
-				var id = $(member[i]).find("id").text();
-				var name = $(member[i]).find("name").text();
-				var email = $(member[i]).find("email").text();
-				var tel = $(member[i]).find("tel").text();
-				var address = $(member[i]).find("address").text();
-				var joindate = $(member[i]).find("joindate").text();
+		success : function(json){// 성공
+			alert(json);
+			var memberList = json.memberlist;
+			for (var i = 0; i < memberList.length; i++) {
+				var id = memberList[i].id;
+				var name = memberList[i].name;
+				var email = memberList[i].address;
+				var tel = memberList[i].tel1;
+				var address = memberList[i].address;
+				var joindate = memberList[i].joindate;
 				
 				var tr = $("<tr>").attr("class", "table-active");
 				var td1 = $("<td>").html(id);
@@ -46,6 +50,28 @@ function memberList(key, word){
 				tr.append(td1).append(td2).append(td3).append(td4).append(td5).append(td6);
 				$("#mlist").append(tr);
 			}
+			
+			
+// 			var member = $(xml).find("member");
+// 			for(var i =0; i<member.length; i++){
+// 				var id = $(member[i]).find("id").text();
+// 				var name = $(member[i]).find("name").text();
+// 				var email = $(member[i]).find("email").text();
+// 				var tel = $(member[i]).find("tel").text();
+// 				var address = $(member[i]).find("address").text();
+// 				var joindate = $(member[i]).find("joindate").text();
+				
+// 				var tr = $("<tr>").attr("class", "table-active");
+// 				var td1 = $("<td>").html(id);
+// 				var td2 = $("<td>").html(name);
+// 				var td3 = $("<td>").html(email);
+// 				var td4 = $("<td>").html(tel);
+// 				var td5 = $("<td>").html(address);
+// 				var td6 = $("<td>").html(joindate);
+	
+// 				tr.append(td1).append(td2).append(td3).append(td4).append(td5).append(td6);
+// 				$("#mlist").append(tr);
+// 			}
 		}
 		
 	});
