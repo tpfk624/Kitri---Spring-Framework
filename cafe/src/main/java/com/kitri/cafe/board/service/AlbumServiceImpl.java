@@ -3,6 +3,8 @@ package com.kitri.cafe.board.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kitri.cafe.board.model.AlbumDto;
@@ -10,6 +12,9 @@ import com.kitri.cafe.board.model.AlbumDto;
 @Service
 public class AlbumServiceImpl implements AlbumService {
 
+	@Autowired
+	private SqlSession sqlSession;
+	
 	@Override
 	public int writeArticle(AlbumDto albumDto) {
 		// TODO Auto-generated method stub

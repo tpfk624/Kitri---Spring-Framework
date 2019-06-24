@@ -3,6 +3,8 @@ package com.kitri.cafe.board.service;
 import java.util.List;
 import java.util.Map;
 
+import org.apache.ibatis.session.SqlSession;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import com.kitri.cafe.board.model.BbsDto;
@@ -10,6 +12,9 @@ import com.kitri.cafe.board.model.BbsDto;
 @Service
 public class BbsServiceImpl implements BbsService {
 
+	@Autowired
+	private SqlSession sqlSession;
+	
 	@Override
 	public int writeArticle(BbsDto bbsDto) {
 		// TODO Auto-generated method stub
