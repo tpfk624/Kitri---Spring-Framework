@@ -1,5 +1,9 @@
 package com.kitri.cafe.board.controller;
 
-public class AlbumController {
+import org.springframework.stereotype.Controller;
 
+@Controller
+public class AlbumController {
+	
+	
 }

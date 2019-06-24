@@ -1,5 +1,8 @@
 package com.kitri.cafe.admin.board.controller;
 
-class BoardAdminController {
+import org.springframework.stereotype.Controller;
 
+@Controller 
+class BoardAdminController {
+	
 }
