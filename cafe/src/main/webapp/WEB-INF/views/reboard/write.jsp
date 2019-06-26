@@ -5,10 +5,10 @@
 <script>
 $(document).ready(function() {
 	$("#writeBtn").click(function() {
-		if($("#subject").val != ""){
+		if($("#subject").val == ""){
 			alert("제목입력");
 			return;
-		}else if ($("#content").val != "") {
+		}else if ($("#content").val == "") {
 			alert("내용입력");
 			return;
 		}else{

@@ -7,7 +7,10 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.kitri.cafe.board.dao.ReboardDao;
 import com.kitri.cafe.board.model.ReboardDto;
+import com.kitri.cafe.util.CafeConstance;
+import com.kitri.cafe.util.NumberCheck;
 
 @Service
 public class ReboardServiceImpl implements ReboardService {
@@ -17,20 +20,25 @@ public class ReboardServiceImpl implements ReboardService {
 	
 	@Override
 	public int writeArticle(ReboardDto reboardDto) {
-		// TODO Auto-generated method stub
-		return 0;
+		int cnt = sqlSession.getMapper(ReboardDao.class).writeArticle(reboardDto);
+		return cnt != 0 ? reboardDto.getSeq() : 0;
 	}
 
 	@Override
 	public List<ReboardDto> listArticle(Map<String, String> parameter) {
-		// TODO Auto-generated method stub
-		return null;
+		int pg = NumberCheck.NotNumberToOne(parameter.get("pg")); //페이지번호 얻어옴
+		int end = pg * CafeConstance.ARTICLE_SIZE;
+		int start = end - CafeConstance.ARTICLE_SIZE;
+		parameter.put("start", start + "");
+		parameter.put("end", end + "");
+		return sqlSession.getMapper(ReboardDao.class).listArticle(parameter);
 	}
 
 	@Override
 	public ReboardDto viewArticle(int seq) {
-		// TODO Auto-generated method stub
-		return null;
+		ReboardDto reboardDto =  sqlSession.getMapper(ReboardDao.class).viewArticle(seq);
+		reboardDto.setContent(reboardDto.getContent().replace("\n", "<br>"));
+		return reboardDto;
 	}
 
 	@Override

@@ -63,29 +63,30 @@
 
 
 	<!-- 공지기능 적용끝  -->
+	<c:forEach var="article" items="${articleList}">
 	<tr>
-		<td align="center" class="text_gray">글번호 출력하는 부분</td>
+		<td align="center" class="text_gray">${article.seq}</td>
 		<td></td>
 		<td nowrap class="onetext" style="padding-right: 5px"></td>
 		<!--td>
      
      </td-->
 		<td style="word-break: break-all;"><a href=""
-			class="link_board_03">글 제목을 출력 하는 부분&nbsp;&nbsp;&nbsp;</a></td>
+			class="link_board_03">${article.subject}&nbsp;&nbsp;&nbsp;</a></td>
 		<td></td>
 		<td style="word-break: break-all;"><a href="javascript:;"
-			onClick="showSideView();" class="link_board_04">작성자를 출력 하는 부분</a></td>
+			onClick="showSideView();" class="link_board_04">${article.name}</a></td>
 		<td></td>
-		<td align="center" class="text_gray">조회수를 출력 하는 부분</td>
+		<td align="center" class="text_gray">${article.seq}</td>
 		<td></td>
-		<td align="center" class="text_gray">작성 일자를 출력 하는 부분</td>
+		<td align="center" class="text_gray">${article.logtime}</td>
 	</tr>
 
 	<tr>
 		<td bgcolor="#ededed" height="1" colspan="11"
 			style="overflow: hidden; padding: 0px"></td>
 	</tr>
-
+	</c:forEach>
 
 	<tr>
 		<td class="bg_board_title_02" height="1" colspan="11"

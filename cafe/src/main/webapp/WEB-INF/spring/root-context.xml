@@ -16,13 +16,14 @@
 		<property name="configLocation" value="/WEB-INF/mybatis/configuration.xml"/> <!-- / = wepapp -->
 		<property name="mapperLocations" ><!-- mapper가 어디있다를 알려줌  -->
 			<list>
+				<value>/WEB-INF/mybatis/mapper_common.xml</value>
 				<value>/WEB-INF/mybatis/mapper_admin_board.xml</value>
 				<value>/WEB-INF/mybatis/mapper_reboard.xml</value>
 			</list>
 		</property>
 	</bean>
 	
-	<!-- 템플릿이란 놈이 알아서 sqlSessio을 만들어줌 -->
+	<!-- 템플릿이란 놈이 알아서 sqlSession을 만들어줌 -->
 	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
 		<constructor-arg ref="sqlSessionFactoryBean"/>
 	</bean>
