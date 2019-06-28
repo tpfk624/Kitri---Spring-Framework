@@ -44,16 +44,32 @@ public class ReboardServiceImpl implements ReboardService {
 		reboardDto.setContent(reboardDto.getContent().replace("\n", "<br>"));
 		return reboardDto;
 	}
-
+	
+	@Override
+	public ReboardDto getArticle(int seq) {
+		return sqlSession.getMapper(ReboardDao.class).viewArticle(seq);
+	}
+	
 	@Override
 	public int modifyArticle(ReboardDto reboardDto) {
-		
-		return 0;
+		int result = sqlSession.getMapper(ReboardDao.class).modifyArticle(reboardDto);
+		return result > 0 ? reboardDto.getSeq() : 0; //결과가 1이상이오면 자기시퀀스를 뱉어라
 	}
 
 	@Override
 	public void deleteArticle(int seq) {
 
+	}
+
+	@Override
+	@Transactional //순서가 중요하니 트랜잭션관리??
+	public int replyArticle(ReboardDto reboardDto) {
+		//업데이트 - insert - 업데이트 순서
+		ReboardDao reboardDao = sqlSession.getMapper(ReboardDao.class);
+		reboardDao.updateStep(reboardDto);
+		reboardDao.replyArticle(reboardDto);
+		reboardDao.updateReply(reboardDto.getPseq());
+		return reboardDto.getSeq(); //위에 세개가 다 실행이 되면 글번호를 리턴받고 라이트오케이로 이동
 	}
 
 }

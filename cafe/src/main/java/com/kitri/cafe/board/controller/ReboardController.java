@@ -97,4 +97,101 @@ public class ReboardController {
 		model.addAttribute("articleList", list);
 		model.addAttribute("navigator", pageNavigation);
 	}
+	
+	
+	////////////일반게시판 기능 종료////////////////////////////////
+	
+	
+	//view와 write를 합쳐놓은 것과 비슷함
+	@RequestMapping(value = "/reply", method = RequestMethod.GET)
+	public String reply(@RequestParam("seq") int seq, @RequestParam Map<String, String> parameter, Model model,HttpSession session) {
+		String path = "";
+		MemberDto memberDto = (MemberDto) session.getAttribute("userInfo");
+		if (memberDto != null) {
+			ReboardDto reboardDto = reboardService.getArticle(seq);
+			
+			model.addAttribute("article", reboardDto);
+			model.addAttribute("parameter", parameter);
+			path = "reboard/reply";
+		} else {
+			path = "redirect:/index/jsp";
+		}
+		return path;
+	}
+	
+	@RequestMapping(value = "/reply", method = RequestMethod.POST)
+	public String reply(ReboardDto reboardDto, @RequestParam Map<String, String> parameter, Model model,
+			HttpSession session) {
+		String path = "";
+
+		MemberDto memberDto = (MemberDto) session.getAttribute("userInfo");
+		if (memberDto != null) {
+			int seq = commonService.getNextSeq();
+
+			reboardDto.setSeq(seq);
+			reboardDto.setId(memberDto.getId());
+			reboardDto.setName(memberDto.getName());
+			reboardDto.setEmail(memberDto.getEmail());
+			//reboardDto.setRef(seq); // 이미 원글의 ref가 들어가있으니까 변경x
+
+			seq = reboardService.replyArticle(reboardDto);
+
+			if (seq != 0) {
+				model.addAttribute("seq", seq);
+				path = "reboard/writeok";
+			} else {
+				path = "reboard/writefail";
+			}
+		} else {
+			path = "";
+		}
+		model.addAttribute("parameter", parameter);
+		return path;
+	}
+	
+	
+	//수정 페이지이동
+	@RequestMapping(value = "/modify", method = RequestMethod.GET)
+	public String modify(@RequestParam("seq") int seq, @RequestParam Map<String, String> parameter, Model model,HttpSession session) {
+		String path = "";
+		MemberDto memberDto = (MemberDto) session.getAttribute("userInfo");
+		if (memberDto != null) {
+			ReboardDto reboardDto = reboardService.getArticle(seq);
+			
+			model.addAttribute("article", reboardDto);
+			model.addAttribute("parameter", parameter);
+			path = "reboard/modify";
+		} else {
+			path = "redirect:/index/jsp";
+		}
+		return path;
+	}
+	
+	
+	//수정 이벤트 발생
+	@RequestMapping(value = "/modify", method = RequestMethod.POST)
+	public String modify(ReboardDto reboardDto, @RequestParam Map<String, String> parameter, Model model,
+			HttpSession session) {
+		String path = "";
+
+		System.out.println("여기 들어왔니??");
+		
+		MemberDto memberDto = (MemberDto) session.getAttribute("userInfo");
+		if (memberDto != null) {
+
+			int seq = reboardService.modifyArticle(reboardDto);
+
+			if (seq != 0) {
+				model.addAttribute("seq", seq);
+				path = "reboard/writeok";
+			} else {
+				path = "reboard/writefail";
+			}
+		} else {
+			path = "";
+		}
+		model.addAttribute("parameter", parameter);
+		return path;
+	}
+	
 }

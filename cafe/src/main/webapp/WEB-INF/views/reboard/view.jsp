@@ -17,7 +17,12 @@ $(document).ready(function() {
 	});
 	
 	$(".moveReplyBtn").click(function() {
-		
+		$("#bcode").val("${bcode}");
+		$("#pg").val("${pg}");
+		$("#key").val("${key}");
+		$("#word").val("${word}");
+		$("#seq").val("${article.seq}");
+		$("#commonForm").attr("method", "GET").attr("action", "${root}/reboard/reply").submit();
 	});
 	
 	$(".firstListBtn").click(function() {
@@ -34,6 +39,17 @@ $(document).ready(function() {
 		$("#key").val("${key}");
 		$("#word").val("${word}");
 		$("#commonForm").attr("method", "GET").attr("action", "${root}/reboard/list").submit();
+	});
+	 
+	
+	//글 수정
+	$(".moveModifyBtn").click(function() {
+		$("#bcode").val("${bcode}");
+		$("#pg").val("${pg}");
+		$("#key").val("${key}");
+		$("#word").val("${word}");
+		$("#seq").val("${article.seq}");
+		$("#commonForm").attr("method", "GET").attr("action", "${root}/reboard/modify").submit();
 	});
 	
 });
@@ -63,7 +79,9 @@ $(document).ready(function() {
 			<img src="${root}/img/board/btn_write_01.gif" class="moveWriteBtn" width="64" height="22"
 			border="0" align="absmiddle" alt="글쓰기"> 
 			<img src="${root}/img/board/btn_reply.gif" class="moveReplyBtn" width="40" height="22"
-			border="0" align="absmiddle" alt="답글">	
+			border="0" align="absmiddle" alt="답글">
+			
+				
 		<c:if test="${userInfo.id == article.id}">
 			<img src="${root}/img/board/btn_modify.gif" class="moveModifyBtn"
 			border="0" align="absmiddle" alt="글수정"> 

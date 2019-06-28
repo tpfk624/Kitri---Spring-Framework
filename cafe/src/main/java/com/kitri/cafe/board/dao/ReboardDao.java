@@ -12,4 +12,12 @@ public interface ReboardDao {
 	ReboardDto viewArticle(int seq); //글번호가져감
 	int modifyArticle(ReboardDto reboardDto);
 	void deleteArticle(int seq);
+	
+	
+	//----------------------일반게시판 종료---------------
+	
+	void updateStep(ReboardDto reboardDto); //맵을 만들면 복잡하니 dto를 보내버린다??
+	int replyArticle(ReboardDto reboardDto); //얘는 진짜 필요
+	void updateReply(int pseq);
+	
 }

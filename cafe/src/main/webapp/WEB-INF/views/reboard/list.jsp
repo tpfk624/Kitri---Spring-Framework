@@ -134,6 +134,7 @@ $(document).ready(function() {
      
      </td-->
 		<td style="word-break: break-all;">
+			<img src="${root}/img/board/blank.gif" width="${article.lev * 15}" height="1">
 			<label class="viewBtn" data-seq="${article.seq}">${article.subject.replace('<', '&lt;')}</label>
 		</td>
 		<td></td>
