@@ -13,7 +13,6 @@ $(document).ready(function(){
 		$("#word").val('');
 		memberList(key, word);		
 	});
-	
 }); 
 
 function memberList(key, word){

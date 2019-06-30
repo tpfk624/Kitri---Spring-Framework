@@ -36,8 +36,4 @@ public class AdminController {
 		return result;  //받은 값이 스트링이니까 그대로 넣기
 		//WEB-INF/views/{"idcount" : 0}
 	}
-	
-	
-	
-	
 }

@@ -71,7 +71,6 @@ public class MemberFrontController extends HttpServlet {
 		} else if ("".equals(act)) {
 
 		}
-
 	}
 
 	protected void doPost(HttpServletRequest request, HttpServletResponse response)
