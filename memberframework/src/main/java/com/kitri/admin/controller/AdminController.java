@@ -26,7 +26,7 @@ public class AdminController {
 	public String admin(@ModelAttribute("userInfo") MemberDto memberDto) {
 		return "admin/member/memberlist"; //뷰의 이름만 설정하면 됨
 	}
-	
+
 	@RequestMapping(value = "/memberlist.kitri", method = RequestMethod.GET)
 	public @ResponseBody String idCheck(@RequestParam Map<String, String> map, @ModelAttribute("userInfo") MemberDto memberDto) {
 		System.out.println(map); //@ResponseBody 데이터를 보낼거다
@@ -36,4 +36,6 @@ public class AdminController {
 		return result;  //받은 값이 스트링이니까 그대로 넣기
 		//WEB-INF/views/{"idcount" : 0}
 	}
+
+	
 }

@@ -1,8 +1,40 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
-	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
-	
+	xmlns:tx="http://www.springframework.org/schema/tx"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
+	<!--웹관련이 아닌 것  -->
 	<!-- Root Context: defines shared resources visible to all other web components -->
-		
+	<bean id="dataSource" class="org.springframework.jdbc.datasource.SimpleDriverDataSource">
+		<property name="driverClass" value="oracle.jdbc.driver.OracleDriver"/>
+		<property name="url" value="jdbc:oracle:thin:@192.168.14.52:1521:orcl"/>
+		<property name="username" value="kitri"/>
+		<property name="password" value="kitri"/>
+	</bean>
+	
+	<bean id="sqlSessionFactoryBean" class="org.mybatis.spring.SqlSessionFactoryBean">
+		<property name="dataSource" ref="dataSource"/> <!-- 앞은 프로퍼티 이름 뒤는 레퍼런스이름으로 위랑 같아야함  -->
+		<property name="configLocation" value="/WEB-INF/mybatis/configuration.xml"/> <!-- / = wepapp -->
+		<property name="mapperLocations" ><!-- mapper가 어디있다를 알려줌  -->
+			<list>
+				<value>/WEB-INF/mybatis/mapper_common.xml</value>
+				<value>/WEB-INF/mybatis/mapper_admin_board.xml</value>
+				<value>/WEB-INF/mybatis/mapper_reboard.xml</value>
+			</list>
+		</property>
+	</bean>
+	
+	<!-- 템플릿이란 놈이 알아서 sqlSession을 만들어줌 -->
+	<bean id="sqlSession" class="org.mybatis.spring.SqlSessionTemplate">
+		<constructor-arg ref="sqlSessionFactoryBean"/>
+	</bean>
+	
+	<!-- 조회수하면서 만듬 무슨 기능인지는 몰라...  -->
+	<bean id="txManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource"/>
+	</bean>
+	
+	<tx:annotation-driven transaction-manager="txManager"/>
+	
 </beans>
